@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Query API Frontend</title>
+</head>
+
+<body>
+    <h1>Query API</h1>
+    <form id="queryForm">
+        <input type="text" id="user_query" placeholder="Enter your query" required />
+        <button type="submit">Submit</button>
+    </form>
+    <div id="result" style="margin-top: 20px;"></div>
+
+    <script>
+        const form = document.getElementById('queryForm');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent form from refreshing the page
+
+            // Get the user_query from the input field
+            const user_query = document.getElementById('user_query').value;
+
+            try {
+                // Make a POST request to your API endpoint
+                const response = await fetch('http://127.0.0.1:8000/api/query', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ user_query })
+                });
+
+                // Parse the JSON response
+                const data = await response.json();
+
+                // Display the result in the result div
+                document.getElementById('result').innerText = "Result: " + data.result;
+            } catch (error) {
+                document.getElementById('result').innerText = "Error: " + error;
+            }
+        });
+    </script>
+</body>
+
+</html>
