@@ -1,7 +1,7 @@
 import google.generativeai as genai
 import base64
 from generate_prompt import build_system_message
-genai.configure(api_key='AIzaSyAM6HAe_3pDw8ZrZpa0Y_5LPQKcRv3r8VA')
+genai.configure(api_key='') # enter api key here
 model = genai.GenerativeModel(model_name='gemini-2.0-flash')
 
 def call_llm(user_query: str):
